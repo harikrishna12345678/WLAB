@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fast Tag Management System</title>
+</head>
+<body>
+    <header>
+        <h1>Fast Tag Management System</h1>
+    </header>
+    <nav>
+        <a href="#add-tag">Add Tag</a>
+        <a href="#manage-tags">Manage Tags</a>
+        <a href="#reports">Reports</a>
+    </nav>
+    <main>
+        <section id="add-tag">
+            <h2>Add New Tag</h2>
+            <form>
+                <label for="tag-id">Tag ID</label>
+                <input type="text" id="tag-id" name="tag-id" placeholder="Enter Tag ID" required />
+                
+                <label for="vehicle-number">Vehicle Number</label>
+                <input type="text" id="vehicle-number" name="vehicle-number" placeholder="Enter Vehicle Number" required />
+                
+                <label for="owner-name">Owner Name</label>
+                <input type="text" id="owner-name" name="owner-name" placeholder="Enter Owner Name" required />
+                
+                <label for="tag-type">Tag Type</label>
+                <select id="tag-type" name="tag-type" required>
+                    <option value="">Select Tag Type</option>
+                    <option value="standard">Standard</option>
+                    <option value="premium">Premium</option>
+                    <option value="vip">VIP</option>
+                </select>
+                
+                <button type="submit">Add Tag</button>
+            </form>
+        </section>
+
+        <section id="manage-tags">
+            <h2>Manage Tags</h2>
+            <p>Feature under development: List, edit, or delete existing tags.</p>
+        </section>
+
+        <section id="reports">
+            <h2>Reports</h2>
+            <p>Feature under development: View usage and transaction reports.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Fast Tag Management System. All rights reserved.</p>
+    </footer>
+</body>
+</html>
