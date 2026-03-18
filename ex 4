@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Operations</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding-top: 50px; background-color: #f0f2f5; }
+        .container { background: white; padding: 20px; border-radius: 8px; display: inline-block; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        input { padding: 8px; margin: 10px; width: 80px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 8px 15px; margin: 5px; cursor: pointer; border: none; border-radius: 4px; background-color: #3498db; color: white; transition: 0.3s; }
+        button:hover { background-color: #2980b9; }
+        #result { margin-top: 20px; font-weight: bold; font-size: 1.2rem; color: #2c3e50; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Basic Math Operations</h2>
+        
+        <input type="number" id="num1" placeholder="Number 1">
+        <input type="number" id="num2" placeholder="Number 2">
+        
+        <br>
+        
+        <button onclick="calculate('+')">Add (+)</button>
+        <button onclick="calculate('-')">Subtract (-)</button>
+        <button onclick="calculate('*')">Multiply (*)</button>
+        <button onclick="calculate('/')">Divide (/)</button>
+
+        <div id="result">Result: </div>
+    </div>
+
+    <script>
+        function calculate(operator) {
+            const n1 = parseFloat(document.getElementById('num1').value);
+            const n2 = parseFloat(document.getElementById('num2').value);
+            const display = document.getElementById('result');
+
+            if (isNaN(n1) || isNaN(n2)) {
+                display.innerText = "Please enter valid numbers!";
+                return;
+            }
+
+            let result;
+            switch(operator) {
+                case '+': result = n1 + n2; break;
+                case '-': result = n1 - n2; break;
+                case '*': result = n1 * n2; break;
+                case '/': 
+                    result = n2 !== 0 ? (n1 / n2).toFixed(2) : "Cannot divide by zero"; 
+                    break;
+            }
+
+            display.innerText = "Result: " + result;
+        }
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; display: flex; justify-content: center; padding-top: 50px; background-color: #f4f4f9; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 350px; }
+        h2 { text-align: center; color: #333; }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 1rem; transition: border-color 0.3s; }
+        input:focus { border-color: #4a90e2; outline: none; }
+        .result-box { margin-top: 20px; padding: 15px; border-radius: 6px; text-align: center; background: #eef2f7; }
+        #bmi-value { font-size: 1.5rem; font-weight: bold; color: #4a90e2; }
+        #bmi-status { font-weight: bold; margin-top: 5px; text-transform: uppercase; }
+        /* Dynamic Colors for Status */
+        .status-underweight { color: #f39c12; }
+        .status-normal { color: #27ae60; }
+        .status-overweight { color: #e67e22; }
+        .status-obese { color: #c0392b; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>BMI Calculator</h2>
+        
+        <div class="input-group">
+            <label>Weight (kg)</label>
+            <input type="number" id="weight" placeholder="Ex: 70" onkeyup="calculateBMI()">
+        </div>
+
+        <div class="input-group">
+            <label>Height (meters)</label>
+            <input type="number" id="height" step="0.01" placeholder="Ex: 1.75" onkeyup="calculateBMI()">
+        </div>
+
+        <div class="result-box">
+            <div>Your BMI is: <span id="bmi-value">-</span></div>
+            <div id="bmi-status">Enter your details</div>
+        </div>
+    </div>
+
+    <script>
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const bmiDisplay = document.getElementById('bmi-value');
+            const statusDisplay = document.getElementById('bmi-status');
+
+            // Reset display if inputs are empty
+            if (!weight || !height || height <= 0) {
+                bmiDisplay.innerText = "-";
+                statusDisplay.innerText = "Enter valid numbers";
+                statusDisplay.className = "";
+                return;
+            }
+
+            // BMI Formula: weight / (height * height)
+            const bmi = (weight / (height * height)).toFixed(2);
+            bmiDisplay.innerText = bmi;
+
+            // Determine body type
+            let status = "";
+            let colorClass = "";
+
+            if (bmi < 18) {
+                status = "Underweight";
+                colorClass = "status-underweight";
+            } else if (bmi >= 18 && bmi <= 25) {
+                status = "Normal";
+                colorClass = "status-normal";
+            } else if (bmi > 25 && bmi <= 30) {
+                status = "Overweight";
+                colorClass = "status-overweight";
+            } else {
+                status = "Obese";
+                colorClass = "status-obese";
+            }
+
+            // Update text and color
+            statusDisplay.innerText = status;
+            statusDisplay.className = colorClass;
+        }
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .converter-box { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 380px; text-align: center; }
+        h2 { color: #2c3e50; margin-bottom: 25px; font-weight: 700; }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #555; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s; }
+        input:focus, select:focus { border-color: #3498db; outline: none; }
+        .result-container { margin-top: 25px; padding: 20px; background-color: #f9f9f9; border-radius: 8px; border-left: 5px solid #2ecc71; }
+        #final-amount { font-size: 2rem; font-weight: bold; color: #27ae60; }
+        #conversion-text { color: #7f8c8d; font-size: 0.9rem; margin-top: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="converter-box">
+    <h2>Currency Converter</h2>
+    
+    <div class="input-group">
+        <label>Enter Amount</label>
+        <input type="number" id="amount" value="1" onkeyup="convert()">
+    </div>
+
+    <div class="input-group">
+        <label>From Currency</label>
+        <select id="fromCurrency" onchange="convert()">
+            <option value="USD">USD - US Dollar</option>
+            <option value="EUR">EUR - Euro</option>
+            <option value="GBP">GBP - British Pound</option>
+            <option value="INR" selected>INR - Indian Rupee</option>
+            <option value="JPY">JPY - Japanese Yen</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label>To Currency</label>
+        <select id="toCurrency" onchange="convert()">
+            <option value="USD" selected>USD - US Dollar</option>
+            <option value="EUR">EUR - Euro</option>
+            <option value="GBP">GBP - British Pound</option>
+            <option value="INR">INR - Indian Rupee</option>
+            <option value="JPY">JPY - Japanese Yen</option>
+        </select>
+    </div>
+
+    <div class="result-container">
+        <div id="final-amount">0.00</div>
+        <div id="conversion-text">---</div>
+    </div>
+</div>
+
+<script>
+    // Rates relative to 1 USD (Standard base)
+    const exchangeRates = {
+        "USD": 1,
+        "EUR": 0.92,
+        "GBP": 0.79,
+        "INR": 83.55,
+        "JPY": 151.40
+    };
+
+    function convert() {
+        const amount = document.getElementById("amount").value;
+        const from = document.getElementById("fromCurrency").value;
+        const to = document.getElementById("toCurrency").value;
+        
+        const display = document.getElementById("final-amount");
+        const rateText = document.getElementById("conversion-text");
+
+        if (amount === "" || amount <= 0) {
+            display.innerText = "0.00";
+            rateText.innerText = "Enter a valid amount";
+            return;
+        }
+
+        // LOGIC: Convert input amount to USD first, then to target currency
+        // Formula: (Amount / Rate of Source) * Rate of Target
+        const amountInUSD = amount / exchangeRates[from];
+        const convertedValue = (amountInUSD * exchangeRates[to]).toFixed(2);
+
+        // Update the UI
+        display.innerText = convertedValue + " " + to;
+        
+        // Show exchange rate info
+        const oneUnitRate = ( (1 / exchangeRates[from]) * exchangeRates[to] ).toFixed(4);
+        rateText.innerText = `1 ${from} = ${oneUnitRate} ${to}`;
+    }
+
+    // Run once on page load to set initial state
+    window.onload = convert;
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cake Order Portal</title>
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #fff5f8; display: flex; justify-content: center; padding: 40px; }
+        .order-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 450px; border-top: 8px solid #ff6b81; }
+        h2 { text-align: center; color: #ff4757; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .section { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; }
+        
+        select, input[type="number"] { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; }
+        
+        .checkbox-group { display: flex; gap: 15px; align-items: center; background: #fffafb; padding: 10px; border-radius: 8px; border: 1px dashed #ffb3ba; }
+        .checkbox-item { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+
+        button { width: 100%; padding: 15px; background-color: #ff6b81; color: white; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        button:hover { background-color: #ff4757; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 107, 129, 0.4); }
+
+        .receipt { margin-top: 25px; padding: 20px; background: #f8f9fa; border-radius: 10px; border-left: 5px solid #ff6b81; display: none; }
+        .receipt h4 { margin: 0 0 10px 0; color: #333; }
+        .total-price { font-size: 1.5rem; color: #ff4757; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="order-card">
+    <h2>🎂 Cake Order Form</h2>
+    
+    <!-- Cake Type Selection -->
+    <div class="section">
+        <label>Select Cake Flavor</label>
+        <select id="cakeType">
+            <option value="500">Chocolate Truffle - ₹500</option>
+            <option value="450">Classic Vanilla - ₹450</option>
+            <option value="600">Red Velvet - ₹600</option>
+            <option value="550">Black Forest - ₹550</option>
+        </select>
+    </div>
+
+    <!-- Weight Selection -->
+    <div class="section">
+        <label>Weight (KG)</label>
+        <select id="weight">
+            <option value="1">1 KG (Base Price)</option>
+            <option value="0.5">0.5 KG (60% Price)</option>
+            <option value="2">2 KG (Double Price)</option>
+        </select>
+    </div>
+
+    <!-- Extras -->
+    <div class="section">
+        <label>Add-ons (Extras)</label>
+        <div class="checkbox-group">
+            <label class="checkbox-item">
+                <input type="checkbox" id="cream" value="50"> Extra Cream (+₹50)
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" id="candles" value="20"> Candles (+₹20)
+            </label>
+        </div>
+    </div>
+
+    <!-- Quantity -->
+    <div class="section">
+        <label>Quantity</label>
+        <input type="number" id="qty" value="1" min="1">
+    </div>
+
+    <button onclick="calculateOrder()">Calculate Total Amount</button>
+
+    <!-- Output Display -->
+    <div id="receipt" class="receipt">
+        <h4>Order Summary</h4>
+        <p id="summaryText"></p>
+        <div class="total-price">Total: ₹<span id="totalDisplay">0</span></div>
+    </div>
+</div>
+
+<script>
+    function calculateOrder() {
+        // Get base values
+        const basePrice = parseFloat(document.getElementById('cakeType').value);
+        const weightFactor = parseFloat(document.getElementById('weight').value);
+        const quantity = parseInt(document.getElementById('qty').value);
+        
+        // Calculate basic cake price based on weight
+        // (If weight is 2kg, cost is double; if 0.5kg, it's 60% of base)
+        let calculatedBase = basePrice * weightFactor;
+        if(weightFactor == 0.5) calculatedBase = basePrice * 0.6; 
+
+        // Add extras
+        let extras = 0;
+        if(document.getElementById('cream').checked) extras += 50;
+        if(document.getElementById('candles').checked) extras += 20;
+
+        // Final Total
+        const total = (calculatedBase + extras) * quantity;
+
+        // Display results
+        const receipt = document.getElementById('receipt');
+        const summary = document.getElementById('summaryText');
+        const totalDisplay = document.getElementById('totalDisplay');
+
+        receipt.style.display = "block";
+        totalDisplay.innerText = total.toFixed(2);
+        
+        const cakeName = document.getElementById('cakeType').options[document.getElementById('cakeType').selectedIndex].text.split('-')[0];
+        summary.innerHTML = `Items: ${quantity} x ${cakeName} (${weightFactor} KG)<br>Extras included.`;
+    }
+</script>
+
+</body>
+</html>
