@@ -1,0 +1,29 @@
+<div id="event-timer" style="font-family: sans-serif; font-size: 1.5rem;">
+    <div id="countdown">Loading...</div>
+</div>
+
+<script>
+    // Set your target date here
+    const eventDate = new Date("Dec 31, 2024 23:59:59").getTime();
+
+    const countdownTask = setInterval(() => {
+        const now = new Date().getTime();
+        const diff = eventDate - now;
+
+        if (diff <= 0) {
+            clearInterval(countdownTask);
+            document.getElementById('countdown').innerHTML = "Registration Closed";
+            return;
+        }
+
+        // Time calculations
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('countdown').innerHTML = 
+            `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            
+    }, 1000);
+</script>
